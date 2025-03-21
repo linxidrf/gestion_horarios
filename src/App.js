@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Menu from "./components/Menu"; // Importa la barra lateral
+import Horario from "./pages/Horario"; // Página de horarios
+/*import DetallesHorario from "./pages/DetallesHorario"; // Página de detalles*/
+import Usuarios from "./pages/Usuarios"; // Página de gestión de usuarios
+import "./styles/styles.css"; // Ajusta la ruta según sea necesario
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app-container"> 
+        <Menu /> {/* Sidebar siempre visible */}
+
+        
+          <Routes>
+            <Route path="/horario" element={<Horario />} /> 
+            <Route path="/usuarios" element={<Usuarios />} />
+            <Route path="*" element={<Horario />} />
+          </Routes>
+        
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
