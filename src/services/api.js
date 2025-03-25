@@ -34,3 +34,26 @@ export const obtenerHorarios = async (semana, rotacion) => {
     }
 };
 
+
+export const obtenerConfiguracionActiva = async () => {
+    try {
+        const response = await axios.get('/api/configuracion-activa');
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            // No active configuration is not an error
+            return null;
+        }
+        throw error;
+    }
+};
+
+export const actualizarHorario = async (datosHorario) => {
+    try {
+        const response = await axios.put('/api/horarios.php', datosHorario);
+        return response.data;
+    } catch (error) {
+        console.error('Error al actualizar horario:', error);
+        throw error;
+    }
+};

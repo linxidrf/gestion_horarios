@@ -263,8 +263,16 @@ button:hover {
 
 
 /* Estilos para el contenido principal */
+
+:root {
+  --primary-color: #0277bd;
+  --secondary-color: #e3f2fd;
+  --text-color: #333;
+  --background-color: #f5f5f5;
+}
 .content {
   justify-content: flex-start;
+  margin-top: 38%;
   margin-left: 90px;
   padding: 5px;
   width: 190vh;
@@ -294,31 +302,6 @@ button:hover {
   border-radius: 4px;
   overflow: hidden;
 }
-
-/* Estilos para el encabezado de horario */
-.horario-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.horario-header h2 {
-  background-color: #b2ebf2;
-  color: #000;
-  padding: 8px;
-  margin: 0;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
-.horario-header h3 {
-  background-color: #e0e0e0;
-  color: #000;
-  padding: 8px;
-  margin: 0;
-}
-
-/* Estilos para las celdas de la tabla */
-/* Eliminadas las clases de jornada que no se usarán */
 
 /* Estilos mejorados para mostrar múltiples usuarios por celda */
 .grupo-personas-cell {
@@ -364,10 +347,17 @@ button:hover {
   color: #0277bd;
   height: 100%;
   display: flex;
-  align-items: center;
-  padding-left: 8px;
+  align-items: flex-start; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+  text-align: center; /* Additional text centering */
+  width: 100%;
+  margin-top: 5px;
+  /* Manejo de texto más agresivo */
+  word-break: break-word; /* Rompe palabras largas si es necesario */
+  overflow-wrap: break-word; /* Alternativa para word-break */
+  max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
+  line-height: 1.2; /* Ajusta la altura de línea */
 }
-
 .cliente-columna {
   position: sticky;
   left: 0;
@@ -376,7 +366,7 @@ button:hover {
 }
 
 .cliente-row {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 5px solid #ef0000;
 }
 
 /* Estilos para estados de carga y error */
@@ -438,10 +428,6 @@ button:hover {
   );
 }
 
-/* Aumentar contraste entre filas para mejor legibilidad */
-.MuiDataGrid-root .MuiDataGrid-row:nth-of-type(odd) {
-  background-color: #f7f7f7;
-}
 
 /* Mejoras para dispositivos móviles y responsividad */
 @media (max-width: 1200px) {
@@ -460,11 +446,30 @@ button:hover {
   }
 }
 
-/* Estilo hover para mejorar la experiencia de usuario */
-.persona-item:hover {
-  background-color: #bbdefb;
-  transition: background-color 0.2s ease;
+/* Estilos para el encabezado de horario */
+.horario-header {
+  text-align: center;
+  margin-bottom: 20px;
 }
+
+.horario-header h2 {
+  background-color: #b2ebf2;
+  color: #000;
+  padding: 8px;
+  margin: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.horario-header h3 {
+  background-color: #e0e0e0;
+  color: #000;
+  padding: 8px;
+  margin: 0;
+}
+
+/* Estilo hover para mejorar la experiencia de usuario */
+
 /* Estilos para el modal */
 .modal {
   display: flex;
@@ -526,23 +531,7 @@ button:hover {
   border-radius: 4px;
 }
 
-.radio-options {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
 
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
 
 /* Estilos de botones */
 .gears {
