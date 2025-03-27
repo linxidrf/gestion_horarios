@@ -612,3 +612,40 @@ button:hover {
 }
 
 
+/* Contenedor principal */
+.MuiBox-root {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Barra de filtro */
+.MuiPaper-root {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Botones de acción */
+button.MuiButton-root {
+  text-transform: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* Personalización de la tabla */
+.MuiDataGrid-root {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Espaciado entre elementos */
+.MuiBox-root > * {
+  margin-bottom: 16px;
+}

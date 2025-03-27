@@ -12,9 +12,9 @@ export const obtenerUsuarios = async () => {
     }
 };
 
-export const guardarConfiguracion = async (configuracion) => {
+export  const guardarConfiguracion = async () => {
     try {
-        const response = await axios.post(`${API_URL}/HorarioController.php`, configuracion);
+        const response = await axios.post(`${API_URL}/HorarioController.php`);
         return response.data;
     } catch (error) {
         console.error("Error guardando configuración:", error);
@@ -22,10 +22,24 @@ export const guardarConfiguracion = async (configuracion) => {
     }
 };
 
-export const obtenerHorarios = async (semana, rotacion) => {
+
+export const obtenerConfiguracionActiva = async () => {
     try {
-        const response = await axios.get(`${API_URL}/HorarioController.php`, {
-            params: { semana, rotacion }
+        const response = await axios.post(`${API_URL}/HorarioController.php`);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            return null;
+        }
+        throw error;
+    }
+};
+
+
+export const obtenerHorario =  (semanaSeleccionada) => {
+    try {
+        const response = axios.post(`${API_URL}/HorarioController.php`, {
+           semanaSeleccionada 
         });
         return response.data;
     } catch (error) {
@@ -34,23 +48,25 @@ export const obtenerHorarios = async (semana, rotacion) => {
     }
 };
 
-
-export const obtenerConfiguracionActiva = async () => {
+export const generarHorario = async (historial) => {
     try {
-        const response = await axios.get('/api/configuracion-activa');
+        const response = await axios.post(`${API_URL}/HorarioController.php`, historial, {
+            headers: { "Content-Type": "application/json" }
+        });
+
         return response.data;
     } catch (error) {
-        if (error.response && error.response.status === 404) {
-            // No active configuration is not an error
-            return null;
-        }
-        throw error;
+        console.error("Error generando horario:", error);
+        return [];
     }
 };
 
+
+
+
 export const actualizarHorario = async (datosHorario) => {
     try {
-        const response = await axios.put('/api/horarios.php', datosHorario);
+        const response = await axios.put(`${API_URL}/HorarioController.php`, datosHorario);
         return response.data;
     } catch (error) {
         console.error('Error al actualizar horario:', error);

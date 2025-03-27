@@ -10,23 +10,22 @@ import {
 import Menu from "../components/Menu";
 import { DataGrid } from "@mui/x-data-grid";
 
+
 const Horarios = () => {
+
     const [modalAjustesOpen, setModalAjustesOpen] = useState(false);
     const [modalSemanaOpen, setModalSemanaOpen] = useState(false);
     const [semanaSeleccionada, setSemanaSeleccionada] = useState("");
     const [semanaInicio, setSemanaInicio] = useState("");
     const [rotacionSeleccionada, setRotacionSeleccionada] = useState("1semana");
     const [listaHorarios, setListaHorarios] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [modoEdicion, setModoEdicion] = useState(false);
     const [cambiosPendientes, setCambiosPendientes] = useState([]);
     const [configuracionActiva, setConfiguracionActiva] = useState(null);
     const [errorConfiguracion, setErrorConfiguracion] = useState(null);
-
-
     
-    // Obtener horario de una semana específica
+    
     const cargarHorario = async () => {
         setIsLoading(true);
         setError(null);
@@ -34,97 +33,18 @@ const Horarios = () => {
             if (!semanaSeleccionada) {
                 throw new Error("Debe seleccionar una semana");
             }
-            const response = await obtenerHorario(semanaSeleccionada);
+           await obtenerHorario(semanaSeleccionada);
             
             // Manejar diferentes tipos de respuestas
             if (response.error) {
                 setError(response.error);
                 return;
             }
-            
-            if (response.mensaje) {
-                setError(response.mensaje);
-                setListaHorarios([]);
-                return;
-            }
-    
-            const data = procesarDatosHorarios(response);
-            setListaHorarios(data);
-        } catch (err) {
-            console.error("Detalles completos del error:", err);
-            setError(err.message || "Error al obtener el horario");
-        } finally {
-            setIsLoading(false);
-        }
-    };
-       // Generar un nuevo horario
-       const handleGenerarHorario = async () => {
-        if (!semanaSeleccionada) {
-            alert("Selecciona una semana");
-            return;
-        }
-
-        try {
-            const response = await generarHorario({ semanaSeleccionada });
-            alert("Horario generado correctamente.");
-            setModalSemanaOpen(false);
-            await cargarHorario();
-        } catch (error) {
-            alert(`Error al generar horario: ${error.message}`);
-        }
-    };
-
-        // Función para obtener configuración activa
-        const verificarConfiguracionActiva = useCallback(async () => {
-            try {
-                const response = await obtenerConfiguracionActiva();
-                if (response) {
-                    setConfiguracionActiva(response);
-                    setModalAjustesOpen(true);
-                    setErrorConfiguracion(null);
-                }
-            } catch (err) {
-                console.error("Error al verificar configuración:", err);
-                setErrorConfiguracion("No se pudo verificar la configuración actual");
-            }
-        }, []);
-
         
-    // Guardar configuración de horarios
-    const handleAjustesSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            if (configuracionActiva) {
-                const confirmar = window.confirm(
-                    `Ya existe una configuración activa desde ${configuracionActiva.fecha_inicio}. ¿Desea reemplazarla?`
-                );
-                if (!confirmar) return;
-            }
-
-            
-            await guardarConfiguracion({
-                semana: semanaInicio,
-                rotacion: rotacionSeleccionada,
-            });
-
-            alert("Configuración guardada correctamente");
-            setModalAjustesOpen(false);
-           
-            
-        } catch (error) {
-            console.error("Error completo al guardar configuración:", error);
-            alert(error.response?.data?.error || "Error al guardar la configuración.");
-        }
-    };
-
- 
-
-    const editarHorario = () => {
-        setModoEdicion(true);
-    };
+    }
+   }
 
 
-    // Procesamiento de datos más robusto
     const procesarDatosHorarios = (datos) => {
         if (!datos || typeof datos !== 'object') {
             console.error("Datos recibidos no son válidos:", datos);
@@ -188,7 +108,6 @@ const Horarios = () => {
 
         return result;
     };
-
 
   
     const handleCellEditCommit = useCallback(
@@ -538,5 +457,6 @@ const Horarios = () => {
             )}
         </div>
     );
+
 }
-export default Horarios;
+export default Horarios
